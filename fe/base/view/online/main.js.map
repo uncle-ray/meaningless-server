@@ -1,0 +1,1 @@
+{"version":3,"file":"main.js","sources":["webpack://fe/./src/main.ts"],"sourcesContent":["const username: string = 'hello'\r\nconsole.log(username)"],"mappings":";;;;;;AAAA;AACA;;;A","sourceRoot":""}
