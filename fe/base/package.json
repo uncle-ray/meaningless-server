@@ -4,17 +4,22 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev:view": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js",
+    "dev:view": "cross-env NODE_ENV=development webpack serve --progress --config build/webpack.dev.config.js",
     "dev:server": "pm2 start app.js"
   },
   "dependencies": {
     "@babel/core": "^7.12.10",
     "@babel/runtime": "^7.12.5",
     "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.5",
     "cross-env": "^7.0.3",
     "express": "^4.17.1",
+    "morgan": "^1.10.0",
     "pm2": "^4.5.1",
     "qiankun": "^2.3.6",
+    "serve-favicon": "^2.5.0",
     "vue": "^3.0.5",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0-rc.2"
@@ -25,6 +30,7 @@
     "@babel/plugin-transform-typescript": "^7.12.1",
     "@babel/preset-env": "^7.12.11",
     "@vue/compiler-sfc": "^3.0.5",
+    "@webpack-cli/serve": "^1.2.2",
     "babel-loader": "^8.2.2",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "clean-webpack-plugin": "^3.0.0",

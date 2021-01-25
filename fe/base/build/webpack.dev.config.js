@@ -4,10 +4,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 
-const outPath = process.env.NODE_ENV === 'development'
-  ? path.resolve(__dirname, '../view/dev')
-  : path.resolve(__dirname, '../view/online')
-
 module.exports = {
   mode: "development",
   cache: false,
@@ -18,8 +14,9 @@ module.exports = {
   target: "web",
   entry: path.resolve(__dirname, "../src/main.ts"),
   output: {
-    path: outPath,
-    publicPath: 'http://localhost:7000/'
+    path: path.resolve(__dirname, '../view/dev'),
+    publicPath: 'http://localhost:7000/',
+    filename: 'js/[name].js',
   },
   resolve: {
     extensions: [".vue", ".jsx", ".js", ".json"],
@@ -121,7 +118,7 @@ module.exports = {
       },
     }),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "../index.html"),
+      template: path.resolve(__dirname, "../public/index.html"),
     }),
     new VueLoaderPlugin(),
   ],
