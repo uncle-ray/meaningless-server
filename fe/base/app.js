@@ -6,7 +6,7 @@ const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 
-const viewPath = process.env.VIEWS_PATH || 'views/dev'
+const viewPath = process.env.VIEWS_PATH || 'view/development'
 
 const app = new express()
 
@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }))
 
-app.use(express.static(path.join(__dirname, './view/dev')))
+app.use(express.static(path.join(__dirname, './view/development')))
 
 app.listen(7000, () => {
   console.log('server is running')

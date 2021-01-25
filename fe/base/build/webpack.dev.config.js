@@ -14,7 +14,7 @@ module.exports = {
   target: "web",
   entry: path.resolve(__dirname, "../src/main.ts"),
   output: {
-    path: path.resolve(__dirname, '../view/dev'),
+    path: path.resolve(__dirname, '../view/development'),
     publicPath: 'http://localhost:7000/',
     filename: 'js/[name].js',
   },
@@ -125,7 +125,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname),
     compress: true,
-    port: 7001,
+    port: 7000,
     hot: true,
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -134,4 +134,7 @@ module.exports = {
         "X-Requested-With, content-type, Authorization",
     },
   },
+  resolve: {
+    extensions: ['.js', '.ts']
+  }
 }
