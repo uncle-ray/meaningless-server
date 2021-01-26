@@ -3,6 +3,8 @@ const { VueLoaderPlugin } = require("vue-loader");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
+const { HotModuleReplacementPlugin, DefinePlugin } = require('webpack')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 module.exports = {
   mode: "development",
@@ -21,8 +23,10 @@ module.exports = {
   resolve: {
     extensions: [".vue", ".jsx", ".js", ".json"],
     alias: {
-      vue: "@vue/runtime-dom",
-      src: path.resolve(__dirname, "../src/")
+      'vue': '@vue/runtime-dom',
+      'vuex': 'vuex/dist/vuex.esm-bundler',
+      '@': path.join(__dirname, '../src'),
+      'src': path.resolve(__dirname, "../src")
     },
   },
   module: {
@@ -62,7 +66,7 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        use: "vue-loader",
+        use: 'vue-loader'
       },
       {
         test: /\.png$/,
@@ -103,7 +107,9 @@ module.exports = {
   watchOptions: {
     ignored: /node_modules/
   },
+  stats: 'errors-only',
   plugins: [
+    new FriendlyErrorsWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "[name].css",
     }),
@@ -116,17 +122,24 @@ module.exports = {
       exposes: {
         
       },
+      // shared: ['vue', 'vuex', 'vue-router']
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "../public/index.html"),
     }),
+    new HotModuleReplacementPlugin(),
     new VueLoaderPlugin(),
+    new DefinePlugin({
+      __VUE_OPTIONS_API__: true,
+      __VUE_PROD_DEVTOOLS__: false
+    })
   ],
   devServer: {
     contentBase: path.join(__dirname),
     compress: true,
     port: 7000,
     hot: true,
+    stats: "errors-only",
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
@@ -135,6 +148,6 @@ module.exports = {
     },
   },
   resolve: {
-    extensions: ['.js', '.ts']
+    extensions: ['.ts', '.js', '.vue', '.json']
   }
 }
